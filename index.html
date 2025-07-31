@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prescription Suggestion Maker</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-fluid d-flex flex-column flex-lg-row">
+        <!-- Main Form Area -->
+        <div class="main-form-area flex-grow-1 p-3">
+            <h1>AI Prescription Suggestion Maker</h1>
+
+            <!-- Patient Information -->
+            <div class="card">
+                <div class="card-header">Patient Information</div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="patientName" class="form-label">Patient Name:</label>
+                            <input type="text" class="form-control" id="patientName" value="" autocomplete="name">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="age" class="form-label">Age:</label>
+                            <input type="number" class="form-control" id="age" value="" autocomplete="bday-year">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="gender" class="form-label">Gender:</label>
+                            <select class="form-select" id="gender" autocomplete="sex">
+                                <option selected>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="weight" class="form-label">Weight (kg):</label>
+                            <input type="number" class="form-control" id="weight" placeholder="e.g., 70" autocomplete="off">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="bloodPressure" class="form-label">Blood Pressure (mmHg):</label>
+                            <input type="text" class="form-control" id="bloodPressure" placeholder="e.g., 120/80" autocomplete="off">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="temperature" class="form-label">Temperature (°C):</label>
+                            <input type="number" class="form-control" id="temperature" placeholder="e.g., 37" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Symptoms -->
+            <div class="card">
+                <div class="card-header">Symptoms (Please describe in detail):</div>
+                <div class="card-body">
+                    <label for="symptoms" class="visually-hidden">Symptoms</label>
+                    <textarea class="form-control" id="symptoms" rows="4" autocomplete="off"></textarea>
+                    <div class="chip-container" id="symptomChips">
+                        <span class="chip">Fever</span>
+                        <span class="chip">Headache</span>
+                        <span class="chip">Cough</span>
+                        <span class="chip">Sore Throat</span>
+                        <span class="chip">Fatigue</span>
+                        <span class="chip">Nausea</span>
+                        <span class="chip">Vomiting</span>
+                        <span class="chip">Diarrhea</span>
+                        <span class="chip">Body Aches</span>
+                        <span class="chip">Rash</span>
+                        <span class="chip">Dizziness</span>
+                        <span class="chip">Shortness of Breath</span>
+                        <span class="chip">Chest Pain</span>
+                        <span class="chip">Abdominal Pain</span>
+                        <span class="chip">Joint Pain</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Past Medical History -->
+            <div class="card">
+                <div class="card-header">Past Medical History / Long-term Problems (if any):</div>
+                <div class="card-body">
+                    <label for="medicalHistory" class="visually-hidden">Past Medical History</label>
+                    <textarea class="form-control" id="medicalHistory" rows="3" placeholder="e.g., Diabetes, Hypertension, Asthma, Allergies..." autocomplete="off"></textarea>
+                    <div class="chip-container" id="historyChips">
+                        <span class="chip">Diabetes</span>
+                        <span class="chip">Hypertension (BP)</span>
+                        <span class="chip">High Cholesterol</span>
+                        <span class="chip">Asthma</span>
+                        <span class="chip">Allergies</span>
+                        <span class="chip">Thyroid Disorder</span>
+                        <span class="chip">Heart Disease</span>
+                        <span class="chip">Kidney Disease</span>
+                        <span class="chip">Liver Disease</span>
+                        <span class="chip">Migraines</span>
+                        <span class="chip">Arthritis</span>
+                        <span class="chip">Depression</span>
+                        <span class="chip">Anxiety</span>
+                        <span class="chip">GERD</span>
+                        <span class="chip">Previous Surgeries</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Findings -->
+            <div class="card">
+                <div class="card-header">Findings:</div>
+                <div class="card-body">
+                    <label for="findings" class="visually-hidden">Findings</label>
+                    <input type="text" class="form-control" id="findings" placeholder="Add findings or type here..." autocomplete="off">
+                </div>
+            </div>
+
+            <!-- Medications -->
+            <div class="card">
+                <div class="card-header">Medications:</div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-borderless" id="medicationTable">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Dosage</th>
+                                    <th>Duration</th>
+                                    <th>Instructions</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Medication rows will be added here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <button class="btn btn-primary mt-3" id="addMedicationBtn">Add Medication</button>
+                </div>
+            </div>
+
+            <!-- Lab Tests -->
+            <div class="card">
+                <div class="card-header">Lab Tests:</div>
+                <div class="card-body">
+                    <label for="labTests" class="visually-hidden">Lab Tests</label>
+                    <input type="text" class="form-control" id="labTests" placeholder="Add lab tests or type here..." autocomplete="off">
+                    <div class="chip-container" id="labTestChips">
+                        <span class="chip">Complete Blood Count (CBC)</span>
+                        <span class="chip">Blood Sugar (FBS/RBS)</span>
+                        <span class="chip">Lipid Profile</span>
+                        <span class="chip">Liver Function Test (LFT)</span>
+                        <span class="chip">Kidney Function Test (KFT)</span>
+                        <span class="chip">Thyroid Profile (T3, T4, TSH)</span>
+                        <span class="chip">Urine Routine</span>
+                        <span class="chip">HbA1c</span>
+                        <span class="chip">Electrolyte Panel</span>
+                        <span class="chip">Vitamin D</span>
+                        <span class="chip">Vitamin B12</span>
+                        <span class="chip">CRP (C-Reactive Protein)</span>
+                        <span class="chip">ESR (Erythrocyte Sedimentation Rate)</span>
+                        <span class="chip">Iron Studies</span>
+                        <span class="chip">D-Dimer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doctor Information -->
+            <div class="card">
+                <div class="card-header">Doctor Information</div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <label for="dateOfVisit" class="form-label">Date of Visit:</label>
+                            <input type="date" class="form-control" id="dateOfVisit" value="" autocomplete="bday">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="doctorName" class="form-label">Doctor Name:</label>
+                            <input type="text" class="form-control" id="doctorName" value="" autocomplete="name">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="specialty" class="form-label">Specialty:</label>
+                            <select class="form-select" id="specialty" autocomplete="organization-title">
+                                <option selected>General Physician</option>
+                                <option>Cardiologist</option>
+                                <option>Pediatrician</option>
+                                <option>Orthopedic</option>
+                                <option>Dermatologist</option>
+                                <option>Neurologist</option>
+                                <option>Oncologist</option>
+                                <option>Gastroenterologist</option>
+                                <option>Endocrinologist</option>
+                                <option>Pulmonologist</option>
+                                <option>Nephrologist</option>
+                                <option>Urologist</option>
+                                <option>Psychiatrist</option>
+                                <option>Ophthalmologist</option>
+                                <option>ENT Specialist</option>
+                                <option>Gynecologist</option>
+                                <option>Surgeon</option>
+                                <option>Anesthesiologist</option>
+                                <option>Radiologist</option>
+                                <option>Pathologist</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" value="" autocomplete="email">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="phoneNumber" class="form-label">Phone Number:</label>
+                            <input type="tel" class="form-control" id="phoneNumber" value="" autocomplete="tel">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="nextFollowupDate" class="form-label">Next Followup Date:</label>
+                            <input type="date" class="form-control" id="nextFollowupDate" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="btn btn-primary btn-lg me-2" id="getSuggestionsBtn">Get Suggestions</button>
+                <button class="btn btn-info btn-lg me-2" id="previewPrescriptionBtn">Preview Prescription</button>
+                <button class="btn btn-success btn-lg" id="downloadPrescriptionBtn">Download Prescription</button>
+            </div>
+        </div>
+
+        <!-- AI Suggestions Area -->
+        <div class="ai-suggestions-area p-3">
+            <h2 class="text-center text-primary mb-4">AI Suggestions</h2>
+            <div id="aiLoadingSpinner" class="text-center my-5" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading AI Suggestions...</span>
+                </div>
+                <p class="mt-2 text-primary">Getting AI Suggestions...</p>
+            </div>
+
+            <div class="card mb-4 ai-suggestion-card" id="findingsSuggestionCard">
+                <div class="card-header">Suggested Findings</div>
+                <div class="card-body">
+                    <div class="chip-container" id="aiFindingsChips">
+                        <!-- AI findings chips will be loaded here -->
+                    </div>
+                    <p class="text-muted text-center mt-3 no-suggestions-message" id="noFindingsMessage">No findings suggested yet.</p>
+                </div>
+            </div>
+
+            <div class="card mb-4 ai-suggestion-card" id="medicationSuggestionCard">
+                <div class="card-header">Suggested Medications</div>
+                <div class="card-body">
+                    <div class="chip-container" id="aiMedicationChips">
+                        <!-- AI medication chips will be loaded here -->
+                    </div>
+                    <p class="text-muted text-center mt-3 no-suggestions-message" id="noMedicationsMessage">No medications suggested yet.</p>
+                </div>
+            </div>
+
+            <div class="card mb-4 ai-suggestion-card" id="labTestSuggestionCard">
+                <div class="card-header">Suggested Lab Tests</div>
+                <div class="card-body">
+                    <div class="chip-container" id="aiLabTestChips">
+                        <!-- AI lab test chips will be loaded here -->
+                    </div>
+                    <p class="text-muted text-center mt-3 no-suggestions-message" id="noLabTestsMessage">No lab tests suggested yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dosage Modal -->
+    <div class="modal fade" id="dosageModal" tabindex="-1" aria-labelledby="dosageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="dosageModalLabel">Set Dosage</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Dosage Schedule:</label>
+
+                        <!-- Morning Dose -->
+                        <div class="form-check d-flex align-items-center mb-2">
+                            <input class="form-check-input me-2" type="checkbox" id="morningDoseCheck">
+                            <label class="form-check-label me-3" for="morningDoseCheck">Morning</label>
+                            <input type="number" class="form-control form-control-sm me-2 quantity-input" id="morningQty" min="0" value="0" style="width: 80px;" aria-label="Morning Quantity" autocomplete="off">
+                            <input type="text" class="form-control form-control-sm unit-input me-2" id="morningUnit" placeholder="e.g., ml" style="width: 80px; display: none;" aria-label="Morning Unit" autocomplete="off">
+                            <select class="form-select form-select-sm food-timing-select" id="morningFoodTiming" style="width: 150px;" aria-label="Morning Food Timing" autocomplete="off">
+                                <option value="">Select...</option>
+                                <option value="After food">After food</option>
+                                <option value="Before food">Before food</option>
+                                <option value="With food">With food</option>
+                                <option value="Any time">Any time</option>
+                            </select>
+                        </div>
+
+                        <!-- Lunch Dose -->
+                        <div class="form-check d-flex align-items-center mb-2">
+                            <input class="form-check-input me-2" type="checkbox" id="lunchDoseCheck">
+                            <label class="form-check-label me-3" for="lunchDoseCheck">Lunch</label>
+                            <input type="number" class="form-control form-control-sm me-2 quantity-input" id="lunchQty" min="0" value="0" style="width: 80px;" aria-label="Lunch Quantity" autocomplete="off">
+                            <input type="text" class="form-control form-control-sm unit-input me-2" id="lunchUnit" placeholder="e.g., ml" style="width: 80px; display: none;" aria-label="Lunch Unit" autocomplete="off">
+                            <select class="form-select form-select-sm food-timing-select" id="lunchFoodTiming" style="width: 150px;" aria-label="Lunch Food Timing" autocomplete="off">
+                                <option value="">Select...</option>
+                                <option value="After food">After food</option>
+                                <option value="Before food">Before food</option>
+                                <option value="With food">With food</option>
+                                <option value="Any time">Any time</option>
+                            </select>
+                        </div>
+
+                        <!-- Night Dose -->
+                        <div class="form-check d-flex align-items-center mb-2">
+                            <input class="form-check-input me-2" type="checkbox" id="nightDoseCheck">
+                            <label class="form-check-label me-3" for="nightDoseCheck">Night</label>
+                            <input type="number" class="form-control form-control-sm me-2 quantity-input" id="nightQty" min="0" value="0" style="width: 80px;" aria-label="Night Quantity" autocomplete="off">
+                            <input type="text" class="form-control form-control-sm unit-input me-2" id="nightUnit" placeholder="e.g., ml" style="width: 80px; display: none;" aria-label="Night Unit" autocomplete="off">
+                            <select class="form-select form-select-sm food-timing-select" id="nightFoodTiming" style="width: 150px;" aria-label="Night Food Timing" autocomplete="off">
+                                <option value="">Select...</option>
+                                <option value="After food">After food</option>
+                                <option value="Before food">Before food</option>
+                                <option value="With food">With food</option>
+                                <option value="Any time">Any time</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveDosageBtn">Save Dosage</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal (kept for consistency, but iframe content will be empty as PDF opens in new tab) -->
+    <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="previewModalLabel">Prescription Preview</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="previewModalBody">
+                    <p class="text-center text-muted">PDF preview will open in a new tab.</p>
+                    <div id="loadingPdf" class="text-center my-3" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Generating PDF...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden div for PDF content generation -->
+    <div id="pdfContent" style="display: none; width: 8.5in; height: 11in; padding: 0.5in; box-sizing: border-box; background-color: white;"></div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- html2canvas and jsPDF for PDF generation (order swapped) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> <!-- Changed to jspdf.umd.min.js -->
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
