@@ -36,14 +36,14 @@ app.post('/get-suggestions', async (req, res) => {
     // Construct the payload for the Gemini API
     const payload = {
         contents: [{ role: "user", parts: [{ text: patientInfoPrompt }] }],
-        // You can add generationConfig here if needed, e.g., temperature, topK, topP
-        // generationConfig: {
-        //     temperature: 0.7,
-        //     maxOutputTokens: 500,
-        // }
+        // Add generationConfig to specify a JSON response format
+        generationConfig: {
+            responseMimeType: "application/json",
+        },
     };
 
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`;
+    // The model is specified in the URL, so no need for the 'model' key in the payload.
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${geminiApiKey}`;
 
     try {
         const response = await fetch(apiUrl, {
@@ -74,5 +74,5 @@ app.post('/get-suggestions', async (req, res) => {
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(`Server running at http://localhost:${port}`);
 });
