@@ -10,7 +10,8 @@ import { fileURLToPath } from 'url'; // Required for __dirname equivalent in ESM
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+// Use process.env.PORT for Render, default to 3000 for local development
+const port = process.env.PORT || 3000; 
 
 // __filename and __dirname are not directly available in ES modules.
 // This is how you get their equivalents:
@@ -72,7 +73,12 @@ app.post('/get-suggestions', async (req, res) => {
     }
 });
 
-// Start the server
-app.listen(port, () => {
+// Start the server AND apply timeout configurations to this ONE server instance
+const server = app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
+
+// Configure server timeouts to prevent "Bad Gateway" or "Connection reset by peer" errors on Render
+// These settings are applied to the 'server' instance created above.
+server.keepAliveTimeout = 120000;
+server.headersTimeout = 120000;
