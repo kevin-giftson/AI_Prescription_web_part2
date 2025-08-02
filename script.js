@@ -346,6 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const medicalHistory = document.getElementById('medicalHistory').value || 'N/A';
         const findings = document.getElementById('findings').value || 'N/A';
         const labTests = document.getElementById('labTests').value || 'N/A';
+        const GeneralAdvise = document.getElementById('GeneralAdvise').value || 'N/A';
         const dateOfVisit = document.getElementById('dateOfVisit').value || 'N/A';
         const doctorName = document.getElementById('doctorName').value || 'N/A';
         const specialty = document.getElementById('specialty').value || 'N/A';
@@ -438,6 +439,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3 class="section-title">Lab Tests</h3>
                     <p>${labTests}</p>
                 </div>
+
+                <div class="section">
+                    <h3 class="section-title">General Advise</h3>
+                    <p>${GeneralAdvise}</p>
+                </div>
                 
                 <div class="signature">
                     <p>This is a Digitally-generated prescription, no signature required.</p>
@@ -461,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .pdf-container {
                     width: 8.5in;
                     min-height: 11in; /* Changed from fixed height to min-height */
-                    padding: 0.75in; /* Increased padding for better margins */
+                    padding: 0.50in; /* Increased padding for better margins */
                     box-sizing: border-box;
                     background-color: white;
                     color: #333;
@@ -476,7 +482,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     padding-bottom: 15px;
                     margin-bottom: 25px; /* More space below header */
                 }
-                .logo { max-width: 100px; height: auto; border-radius: 8px; } /* Slightly larger logo */
+                .logo { max-width: 135px; height: auto; } /* Slightly larger logo */
                 .title-container {
                     text-align: right; /* Align title to the right */
                 }
