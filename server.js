@@ -23,6 +23,16 @@ app.use(express.json());
 // Serve static files from the current directory
 app.use(express.static(path.join(__dirname)));
 
+const server = app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
+});
+
+// Configure server timeouts to prevent "Bad Gateway" or "Connection reset by peer" errors on Render
+// Render documentation suggests increasing these values for Node.js web services.
+// Setting to 120000ms (120 seconds) as recommended.
+server.keepAliveTimeout = 120000;
+server.headersTimeout = 120000;
+
 // API endpoint for AI suggestions
 app.post('/get-suggestions', async (req, res) => {
     const geminiApiKey = process.env.GEMINI_API_KEY;
