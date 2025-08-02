@@ -443,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
                 <div class="signature">
-                    <p>Signature: _________________________</p>
+                    <p>This is a Digitally-generated prescription, no signature required.</p>
                 </div>
             </div>
         `;
@@ -576,11 +576,11 @@ document.addEventListener('DOMContentLoaded', function() {
             // Convert inches to points (1 inch = 72 points)
             const cssMarginPoints = 0.75 * 72;
 
+            // ... (inside generateAndOpenPdf function)
             const canvas = await html2canvas(pdfContentDiv, {
                 scale: 3, // Increased scale for better quality
                 useCORS: true,
                 allowTaint: true,
-                // Removed windowWidth and windowHeight
             });
 
             const imgData = canvas.toDataURL('image/png');
