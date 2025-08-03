@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
 const server = app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+    console.log(`Server running at http://localhost:${port}`);
 });
 
 // Configure server timeouts to prevent "Bad Gateway" or "Connection reset by peer" errors on Render
@@ -82,7 +82,3 @@ app.post('/get-suggestions', async (req, res) => {
     }
 });
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
-});
