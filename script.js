@@ -697,10 +697,10 @@ document.addEventListener('DOMContentLoaded', function() {
     downloadPrescriptionBtn.addEventListener('click', () => generateAndOpenPdf('download'));
 
     // Initial row on page load
-    addMedicationRow();
+    //addMedicationRow();
 
     // Event listener for "Add Medication" button
-    addMedicationBtn.addEventListener('click', addMedicationRow);
+    addMedicationBtn.addEventListener('click', () => addMedicationRow());
 
     // Add click listeners for pre-defined chips
     document.getElementById('symptomChips').addEventListener('click', function(e) {
