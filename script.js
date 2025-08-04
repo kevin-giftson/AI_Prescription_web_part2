@@ -518,45 +518,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 .section { page-break-inside: avoid; }
                 .pdf-table { page-break-inside: avoid; }
 
-                /* === NEW STYLES FOR TWO-COLUMN PATIENT/DOCTOR INFO === */
-                .patient-doctor-info-columns {
-                    display: flex; /* Use flexbox for side-by-side layout */
-                    justify-content: space-between; /* Pushes columns to the ends */
-                    gap: 20px; /* Space between the columns */
-                    margin-bottom: 25px; /* Space below this combined section */
-                    padding: 15px; /* Add some padding around the content */
-                    border: 1px solid #ddd; /* Add a subtle border */
-                    border-radius: 8px; /* Rounded corners */
-                    background-color: #f9f9f9; /* Light background */
-                }
-
-                .patient-doctor-info-columns .patient-info,
-                .patient-doctor-info-columns .doctor-info {
-                    flex: 1; /* Both columns take equal available space */
-                    min-width: 0; /* Allow content to shrink if needed */
-                    padding: 0; /* Remove padding from .section if applied elsewhere for screen display */
-                    border: none; /* Remove border from .section if applied elsewhere */
-                    background-color: transparent; /* Remove background from .section if applied elsewhere */
-                    margin-bottom: 0; /* Remove bottom margin from inner sections */
-                }
-                /* Ensure that the .section-title and .info-grid within these columns still apply */
-                .patient-doctor-info-columns .section-title {
-                    margin-top: 0;
-                    margin-bottom: 10px; /* Adjust as needed */
-                }
-
-                @media print {
-                    body { -webkit-print-color-adjust: exact; }
-                    .pdf-container { box-shadow: none; }
-                    /* !important to ensure print overrides */
-                    .header { border-bottom-color: #1ea69a !important; }
-                    .section-title { border-bottom-color: #57bcb3 !important; }
-                    /* Ensure flex direction is row for print if it would otherwise stack */
-                    .patient-doctor-info-columns {
-                        flex-direction: row !important;
-                        page-break-inside: avoid; /* Prevent breaking this combined section across pages */
-                    }
-                }
             </style>
         `;
 

@@ -244,4 +244,13 @@ h2 {
         font-size: 0.8em;
         padding: 5px 10px;
     }
+
+}
+
+@media (max-width: 500px) { /* Changed breakpoint for mobile */
+    #addMedicationBtn{
+        padding: 6px 12px;
+    
+
+    }
 }
