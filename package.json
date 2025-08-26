@@ -10,10 +10,18 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "dotenv": "^17.2.1",
     "express": "^4.19.2",
     "node-fetch": "^3.3.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevin-giftson/AI_Prescription_web_part2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kevin-giftson/AI_Prescription_web_part2/issues"
+  },
+  "homepage": "https://github.com/kevin-giftson/AI_Prescription_web_part2#readme",
+  "description": ""
 }
